@@ -1,0 +1,42 @@
+<form [formGroup]="formUserRegistration">
+  <h1>User Registration</h1>
+
+  <div class="userRegistrationStatus" *ngIf="showUserRegistrationStatus()">
+    <div [ngClass]="{'userRegistrationSuccess': isUserRegistrationSuccess, 'userRegistrationFailure': !isUserRegistrationSuccess}"
+         [innerHtml]="userRegistrationStatusMessage"></div>    
+  </div>
+
+  <div class="userRegistrationGroup">
+    <div class="row">
+      <div class="col-xs-2 col-sm-2 col-md-2">
+        First Name
+      </div>
+      <div class="col-xs-10 col-sm-10 col-md-10">
+        <input type="text" id="txtFirstName" formControlName="firstname" [(ngModel)]="firstName" (input)="reset()" />*
+        <div *ngIf="hasRequiredError(formUserRegistration.controls['firstname'])"
+             class="error-text">
+          First Name is required
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-2 col-sm-2 col-md-2">
+        Last Name
+      </div>
+      <div class="col-xs-10 col-sm-10 col-md-10">
+        <input type="text" id="txtLastName" formControlName="lastname" [(ngModel)]="lastName" (input)="reset()" />*
+        <div *ngIf="hasRequiredError(formUserRegistration.controls['lastname'])"
+             class="error-text">
+          Last Name is required
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-2 col-sm-2 col-md-2"></div>
+      <div class="col-xs-10 col-sm-10 col-md-10">
+        <input type="button" id="btnSubmit" value="Submit" (click)="onSubmit()" />
+      </div>
+    </div>
+  </div>
+</form>

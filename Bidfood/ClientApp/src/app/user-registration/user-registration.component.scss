@@ -1,0 +1,41 @@
+h1 {
+  padding-top: 40px;
+  padding-bottom: 15px;
+}
+.row {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+input[type=text] {
+  width: 20%;
+}
+#btnSubmit {
+  color: black;
+  background-color: #91ba5c;
+  border-color: #85b14b;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  font-size: 18px;
+  padding: 5px 20px;
+}
+.error-text {
+  color:#E1001A;
+  font-size:12px;
+}
+.userRegistrationGroup{
+    padding-top: 15px;
+}
+.userRegistrationStatus {
+  font-size: 16px; 
+  width: 34%;
+}
+.userRegistrationSuccess {
+  color: green;
+  border: solid 2px green;
+  padding: 10px 10px 10px 10px;
+}
+.userRegistrationFailure {
+  color: red;
+  border: solid 2px red;
+  padding: 10px 10px 10px 10px;
+}
