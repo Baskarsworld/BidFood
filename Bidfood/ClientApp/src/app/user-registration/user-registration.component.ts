@@ -8,6 +8,7 @@ import { CONSTANTS } from '../../shared/constants';
   templateUrl: './user-registration.component.html',
   styleUrls: ['./user-registration.component.scss']
 })
+
 export class UserRegistrationComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
@@ -18,6 +19,7 @@ export class UserRegistrationComponent implements OnInit {
   userRegistrationStatusMessage = '';
   submitted = false;
   isUserRegistrationInitiated = false;
+  isUserRegistrationCompleted = false;
   isUserRegistrationSuccess = false;
 
   formUserRegistration: FormGroup = new FormGroup({
@@ -37,6 +39,7 @@ export class UserRegistrationComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
     this.isUserRegistrationInitiated = false;
+    this.isUserRegistrationCompleted = false;
     this.isUserRegistrationSuccess = false;
 
     if (this.formUserRegistration.invalid) {
@@ -45,11 +48,13 @@ export class UserRegistrationComponent implements OnInit {
 
     this.isUserRegistrationInitiated = true;
     this.http.post(this.baseUrl + 'userregistration', this.getUserDetailsRequest()).subscribe(() => {
+      this.isUserRegistrationCompleted = true;
       this.isUserRegistrationSuccess = true;
       this.userRegistrationStatusMessage = CONSTANTS.userRegistrationSuccessMessage
     }, () => {
-      this.isUserRegistrationSuccess = false,
-        this.userRegistrationStatusMessage = CONSTANTS.userRegistrationFailureMessage
+      this.isUserRegistrationCompleted = true;
+      this.isUserRegistrationSuccess = false;
+      this.userRegistrationStatusMessage = CONSTANTS.userRegistrationFailureMessage
     });
   }
 
@@ -65,13 +70,14 @@ export class UserRegistrationComponent implements OnInit {
   }
 
   showUserRegistrationStatus() {
-    return this.submitted && this.isUserRegistrationInitiated;
+    return this.submitted && this.isUserRegistrationCompleted;
   }
 
   reset() {
     this.submitted = false;
     this.isUserRegistrationInitiated = false;
     this.isUserRegistrationSuccess = false;
+    this.isUserRegistrationCompleted = false;
   }
 
 }
